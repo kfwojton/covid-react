@@ -36,10 +36,15 @@ function setLaunches(data) {
         throw new Error(`${response.status}: ${response.statusText}`)
       })
       .then(data => {
-        var parsedJson = Papa.parse(data , { header : true, transformHeader:true});
+        // var datas = data.replace('/'g, '');
+        var datas = data.replace(new RegExp('/', 'g'), '_');
+        // datas = datas.replace('/', '');
+        var parsedJson = Papa.parse(datas , { header : true, transformHeader:true,
+        });
         dispatch({
           type: GET_LAUNCHES_SUCCESS
         })
+
         dispatch(setLaunches(parsedJson))
         // dispatch(filterLaunches())
       })

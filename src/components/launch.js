@@ -24,15 +24,14 @@ class Launch extends PureComponent {
     return (
 
       <tr className="table_row">
-        <th>n/a</th>
-        <th>{launch.mission_name}</th>
-        <th>{launch.rocket.rocket_name}</th>
-        <th>{launch.rocket.rocket_type}</th>
-        <th>{launchDate}</th>
-        <th>{launch.details}</th>
-        <th>{launch.flight_number}</th>
-        <th><a href={launch.links.article_link}><img src={linkImage} className="link_icon" alt="link"/></a>
-        </th>
+        <th> {launch.Country_Region}</th>
+        <th> {launch.Province_State}</th>
+
+        
+
+
+
+
       </tr>
 
 

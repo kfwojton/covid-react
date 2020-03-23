@@ -35,11 +35,9 @@ class Page extends Component {
   render() {
 
 
-    let { displayedLaunches, isFetched, error } = this.props
-    console.log("kk");
-    console.log(displayedLaunches)
+    let { launches, isFetched, error } = this.props
 
-    let launches = displayedLaunches.map((launch, index) => {
+    let actualLaunches = launches.map((launch, index) => {
 
       return (
           <Launch key={index} launch={launch}/>
@@ -119,7 +117,7 @@ class Page extends Component {
                      </thead>
                      <tbody>
 
-                     {launches}
+                     {actualLaunches}
 
                     </tbody>
                 </Table>
