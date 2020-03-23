@@ -16,6 +16,7 @@
     "reactstrap": "^7.0.2",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "react-scripts": "2.1.1",
     "serve": "^10.1.1"
   },
   "devDependencies": {
