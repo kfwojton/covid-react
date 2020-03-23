@@ -4,11 +4,11 @@ import Page from '../components/page'
 
 function mapStateToProps(state) {
   // const { displayedLaunches, isFetched, error } = state.page
-  const { launches, isFetched, error } = state.page
+  const { displayedLaunches, isFetched, error } = state.page
   console.log(state);
 
   return {
-    launches,
+    displayedLaunches,
     isFetched,
     error
   }
