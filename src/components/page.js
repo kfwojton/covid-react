@@ -11,10 +11,11 @@ class Page extends Component {
     super(props);
     this.state = {
       isLaunchSuccess: false,
-      isReused: false,
+      isUSOnly: false,
       isWithReddit: false,
       searchQuery: '',
     }
+
     this.handleSearch = this.handleSearch.bind(this)
     this.handleCheckBoxes = this.handleCheckBoxes.bind(this)
   }
@@ -35,14 +36,22 @@ class Page extends Component {
   render() {
 
 
-    let { displayedLaunches, isFetched, error } = this.props
+    let { displayedLaunches, launches, isFetched, error } = this.props
 
-    let launches = displayedLaunches.map((launch, index) => {
+    let actualLaunches = displayedLaunches.map((launch, index) => {
 
       return (
           <Launch key={index} launch={launch}/>
       )
     })
+
+    // let actualLaunches = launches.map((launch, index) => {
+    //
+    //   return (
+    //       <Launch key={index} launch={launch}/>
+    //   )
+    // })
+
 
     return (
 
@@ -79,28 +88,21 @@ class Page extends Component {
                      <th></th>
                      <th>
                        <input
-                          name="isLaunchSuccess"
+                          name="isUSOnly"
                           type="checkbox"
-                          checked={this.state.isLaunchSuccess}
+                          checked={this.state.isUSOnly}
                           onChange={this.handleCheckBoxes} />
-                          <span className="white_text small_padding_left"> Launch Success </span>
+                          <span className="white_text small_padding_left"> US Only </span>
                      </th>
                      <th>
                        <input
-                          name="isReused"
+                          name="sortByPercentDiff"
                           type="checkbox"
-                          checked={this.state.isReused}
+                          checked={this.state.sortByPercentDiff}
                           onChange={this.handleCheckBoxes} />
-                          <span className="white_text small_padding_left">Reused </span>
+                          <span className="white_text small_padding_left">Sort by biggest % diff </span>
                      </th>
-                     <th>
-                       <input
-                          name="isWithReddit"
-                          type="checkbox"
-                          checked={this.state.isWithReddit}
-                          onChange={this.handleCheckBoxes} />
-                          <span className="white_text small_padding_left">With Reddit </span>
-                      </th>
+                     
                     </tr>
                 </tbody>
               </Table>
@@ -108,21 +110,19 @@ class Page extends Component {
                 <Table className="main_table" hover>
                    <thead>
                      <tr>
-                           <th>Badge</th>
-                           <th>Mission Name</th>
-                           <th>Rocket Name</th>
-                           <th>Rocket Type</th>
-                           <th>Launch Date</th>
-                           <th>Details</th>
-                           <th>ID</th>
-                           <th>Articles</th>
+                           <th>Country</th>
+                           <th>State</th>
+                           <th>Active Cases</th>
+
+                           <th>New Cases yesterday</th>
+                           <th>Day on Day Change</th>
                      </tr>
                      </thead>
                      <tbody>
 
-                     {launches}
+                     {actualLaunches}
 
-                       </tbody>
+                    </tbody>
                 </Table>
 
             </Col>

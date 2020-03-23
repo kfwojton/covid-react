@@ -3,7 +3,9 @@ import * as pageActions from '../redux/actions/page'
 import Page from '../components/page'
 
 function mapStateToProps(state) {
+  // const { displayedLaunches, isFetched, error } = state.page
   const { displayedLaunches, isFetched, error } = state.page
+  console.log(state);
 
   return {
     displayedLaunches,

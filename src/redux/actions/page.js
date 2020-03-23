@@ -9,8 +9,7 @@ import {
 } from '../constants/page'
 
 function setLaunches(data) {
-  console.log('kevin')
-  console.log(data)
+
   const launches = data.data.map(launches => {
     return launches
   })
@@ -32,17 +31,35 @@ function setLaunches(data) {
 
         if (response.ok) {
           return response.text()
-
         }
+
         throw new Error(`${response.status}: ${response.statusText}`)
       })
       .then(data => {
-        var parsedJson = Papa.parse(data , { header : true, transformHeader:true});
+        // var datas = data.replace('/'g, '');
+        var datas = data.replace(new RegExp('/', 'g'), '_');
+        // datas = datas.replace('/', '');
+        var parsedJson = Papa.parse(datas , { header : true, transformHeader:true,
+        });
+
+
+        let ip = fetch('https://api6.ipify.org?format=json')
+          .then(res => res.json())
+          .then(json => {
+
+             // = json.ap
+            return ({text: json.ip});
+          });
+
+        console.log(ip);
+        console.log(ip);
+        parsedJson['ip'] = ip;
         dispatch({
           type: GET_LAUNCHES_SUCCESS
         })
+
         dispatch(setLaunches(parsedJson))
-        // dispatch(filterLaunches())
+        dispatch(filterLaunches())
       })
       .catch(error => {
         dispatch({
@@ -55,7 +72,7 @@ function setLaunches(data) {
 
 const baseQueryState = {
   isLaunchSuccess: null,
-  isReused: null,
+  isUSOnly: null,
   isWithReddit: null,
   searchQuery: '',
 }
@@ -65,37 +82,23 @@ export function filterLaunches(state = baseQueryState) {
 
     let displayedLaunches = getState().page.launches;
 
-    if (state.isReused) {
-      // TODO: This can be optimized, but given the current use case there isn't too much reason to spend a ton of time optimizing this
+    if (state.isUSOnly) {
+
       displayedLaunches = displayedLaunches.filter(launch => {
-        if (launch.rocket.fairings === null) {
-          return false
-        } else if (launch.rocket.fairings.reused) {
-          return true
-        }
-
-        let first_stage = launch.rocket.first_stage.cores.map(core => core.reused);
-        if (first_stage.indexOf(true)) {
-          return true
-        }
-
-        let second_stage = launch.rocket.second_stage.payloads.map(payload => payload.reused);
-        if (second_stage.indexOf(true)) {
-          return true
-        }
-
-        return false
+        console.log(launch.Province_State)
+        return launch.Province_State.toLowerCase().includes("us")
       })
     }
-    if (state.isLaunchSuccess) {
-      displayedLaunches = displayedLaunches.filter(launch => launch.launch_success === true);
-    }
-    if (state.isWithReddit) {
-      displayedLaunches = displayedLaunches.filter(launch => launch.links.reddit_campaign || launch.links.reddit_launch || launch.links.reddit_media || launch.links.reddit_recovery);
-      }
+
+    // if (state.isLaunchSuccess) {
+    //   displayedLaunches = displayedLaunches.filter(launch => launch.launch_success === true);
+    // }
+    // if (state.isWithReddit) {
+    //   displayedLaunches = displayedLaunches.filter(launch => launch.links.reddit_campaign || launch.links.reddit_launch || launch.links.reddit_media || launch.links.reddit_recovery);
+    //   }
     if (state.searchQuery) {
       displayedLaunches = displayedLaunches.filter(launch => {
-        return launch.mission_name.toLowerCase().includes(state.searchQuery.toLowerCase())
+        return launch.Province_State.toLowerCase().includes(state.searchQuery.toLowerCase())
       })
     }
 
