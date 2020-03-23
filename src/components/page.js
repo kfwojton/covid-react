@@ -36,6 +36,8 @@ class Page extends Component {
 
 
     let { displayedLaunches, isFetched, error } = this.props
+    console.log("kk");
+    console.log(displayedLaunches)
 
     let launches = displayedLaunches.map((launch, index) => {
 
@@ -108,21 +110,18 @@ class Page extends Component {
                 <Table className="main_table" hover>
                    <thead>
                      <tr>
-                           <th>Badge</th>
-                           <th>Mission Name</th>
-                           <th>Rocket Name</th>
-                           <th>Rocket Type</th>
-                           <th>Launch Date</th>
-                           <th>Details</th>
-                           <th>ID</th>
-                           <th>Articles</th>
+                           <th>Country</th>
+                           <th>State</th>
+                           <th>Active Cases</th>
+                           <th>Day on Day Change</th>
+                           <th>Days since first case</th>
                      </tr>
                      </thead>
                      <tbody>
 
                      {launches}
 
-                       </tbody>
+                    </tbody>
                 </Table>
 
             </Col>

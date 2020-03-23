@@ -9,8 +9,7 @@ import {
 } from '../constants/page'
 
 function setLaunches(data) {
-  console.log('kevin')
-  console.log(data)
+
   const launches = data.data.map(launches => {
     return launches
   })
@@ -32,8 +31,8 @@ function setLaunches(data) {
 
         if (response.ok) {
           return response.text()
-
         }
+
         throw new Error(`${response.status}: ${response.statusText}`)
       })
       .then(data => {
@@ -65,39 +64,39 @@ export function filterLaunches(state = baseQueryState) {
 
     let displayedLaunches = getState().page.launches;
 
-    if (state.isReused) {
-      // TODO: This can be optimized, but given the current use case there isn't too much reason to spend a ton of time optimizing this
-      displayedLaunches = displayedLaunches.filter(launch => {
-        if (launch.rocket.fairings === null) {
-          return false
-        } else if (launch.rocket.fairings.reused) {
-          return true
-        }
-
-        let first_stage = launch.rocket.first_stage.cores.map(core => core.reused);
-        if (first_stage.indexOf(true)) {
-          return true
-        }
-
-        let second_stage = launch.rocket.second_stage.payloads.map(payload => payload.reused);
-        if (second_stage.indexOf(true)) {
-          return true
-        }
-
-        return false
-      })
-    }
-    if (state.isLaunchSuccess) {
-      displayedLaunches = displayedLaunches.filter(launch => launch.launch_success === true);
-    }
-    if (state.isWithReddit) {
-      displayedLaunches = displayedLaunches.filter(launch => launch.links.reddit_campaign || launch.links.reddit_launch || launch.links.reddit_media || launch.links.reddit_recovery);
-      }
-    if (state.searchQuery) {
-      displayedLaunches = displayedLaunches.filter(launch => {
-        return launch.mission_name.toLowerCase().includes(state.searchQuery.toLowerCase())
-      })
-    }
+    // if (state.isReused) {
+    //   // TODO: This can be optimized, but given the current use case there isn't too much reason to spend a ton of time optimizing this
+    //   displayedLaunches = displayedLaunches.filter(launch => {
+    //     if (launch.rocket.fairings === null) {
+    //       return false
+    //     } else if (launch.rocket.fairings.reused) {
+    //       return true
+    //     }
+    //
+    //     let first_stage = launch.rocket.first_stage.cores.map(core => core.reused);
+    //     if (first_stage.indexOf(true)) {
+    //       return true
+    //     }
+    //
+    //     let second_stage = launch.rocket.second_stage.payloads.map(payload => payload.reused);
+    //     if (second_stage.indexOf(true)) {
+    //       return true
+    //     }
+    //
+    //     return false
+    //   })
+    // }
+    // if (state.isLaunchSuccess) {
+    //   displayedLaunches = displayedLaunches.filter(launch => launch.launch_success === true);
+    // }
+    // if (state.isWithReddit) {
+    //   displayedLaunches = displayedLaunches.filter(launch => launch.links.reddit_campaign || launch.links.reddit_launch || launch.links.reddit_media || launch.links.reddit_recovery);
+    //   }
+    // if (state.searchQuery) {
+    //   displayedLaunches = displayedLaunches.filter(launch => {
+    //     return launch.mission_name.toLowerCase().includes(state.searchQuery.toLowerCase())
+    //   })
+    // }
 
     dispatch({
       type: FILTER_LAUNCHES,
