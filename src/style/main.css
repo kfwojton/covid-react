@@ -1,0 +1,75 @@
+@font-face {
+  font-family: 'normal_font';
+  src: url('../assets/fonts/geomanist-regular-webfont.eot'); /* IE9 Compat Modes */
+  src: url('../assets/fonts/geomanist-regular-webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('../assets/fonts/geomanist-regular-webfont.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../assets/fonts/geomanist-regular-webfont.woff') format('woff'), /* Pretty Modern Browsers */
+       url('../assets/fonts/geomanist-regular-webfont.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('../assets/fonts/geomanist-regular-webfont.svg') format('svg'); /* Legacy iOS */
+}
+
+body {
+  background-color: #ccc;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image:  url("../assets/images/background.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family:'normal_font';
+}
+
+.page {
+  position: relative;
+  text-align: center;
+}
+
+.page__error {
+  position: absolute;
+  padding: 5px;
+  color: #fff;
+  background-color: #f44336;
+}
+
+.main_table{
+  background-color:white;
+}
+
+.page_title {
+  font-size:40px;
+}
+
+.filter_bar {
+  background:rgba(255,255,255,0.3);
+  /* border-top:none; */
+  /* border-top-left-radius/:25px; */
+}
+
+.refresh_icon {
+  width:30px;
+  border:1px solid white;
+  border-radius:100%;
+  padding:5px;
+}
+
+.link_icon {
+  width:15px;
+}
+
+.small_padding_left {
+  color:white;
+  padding-left:10px;
+}
+
+.white_text {
+  color:white;
+}
+
+.table_row {
+  background:rgba(255,255,255,0.3);
+}
+
+.button_hide {
+  background-color:transparent;
+  border:none;
+}
