@@ -106,8 +106,8 @@ class Page extends Component {
                 <Table className="main_table" hover>
                    <thead>
                      <tr>
-                           <th>Country</th>
                            <th>State</th>
+                           <th>County</th>
                            <th>Active Cases</th>
 
                            <th>New Cases yesterday</th>
