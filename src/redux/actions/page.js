@@ -1,4 +1,5 @@
 import Papa from 'papaparse';
+import _ from 'lodash';
 
 import {
   GET_LAUNCHES_REQUEST,
@@ -26,7 +27,8 @@ function setLaunches(data) {
       type: GET_LAUNCHES_REQUEST
     })
 
-    return fetch(`https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv`)
+    // return fetch(`https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv`)
+    return fetch(`https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv?_ga=2.30767359.1530011231.1584999241-151559259.1584999241`)
       .then(response => {
 
         if (response.ok) {
@@ -38,6 +40,7 @@ function setLaunches(data) {
       .then(data => {
         // var datas = data.replace('/'g, '');
         var datas = data.replace(new RegExp('/', 'g'), '_');
+        // var datas = data.replace(new RegExp('County Name', 'g'), 'County_Name');
         // datas = datas.replace('/', '');
         var parsedJson = Papa.parse(datas , { header : true, transformHeader:true,
         });
@@ -54,6 +57,16 @@ function setLaunches(data) {
         console.log(ip);
         console.log(ip);
         parsedJson['ip'] = ip;
+        // parsedJson = _.filter(parsedJson, [launch => {
+        //   if (launch.has('County Name')) {
+        //     return true
+        //   } else {
+        //     return false
+        //   }} ]
+        //   );
+        // parsedJson = _.sortBy(parsedJson, [item => item[item.length-1]])
+        // parsedJson = _.sortBy(parsedJson, 'County Name')
+
         dispatch({
           type: GET_LAUNCHES_SUCCESS
         })
@@ -82,10 +95,17 @@ export function filterLaunches(state = baseQueryState) {
 
     let displayedLaunches = getState().page.launches;
 
+    displayedLaunches = displayedLaunches.filter(launch =>_.has(launch,'County Name') );
+    console.log("Walter");
+    var lastEntry = displayedLaunches[displayedLaunches.length-1]
+    // var lastValue = lastEntry[lastEntry.length-1]
+    var lastKey = _.findLastKey(lastEntry)
+
+    displayedLaunches = _.reverse(_.sortBy( displayedLaunches, [object => parseInt(object[lastKey])]));
+    // displayedLaunches = _.sortBy(displayedLaunchs, [function(o) { return o.user; }]
     if (state.isUSOnly) {
 
       displayedLaunches = displayedLaunches.filter(launch => {
-        console.log(launch.Province_State)
         return launch.Province_State.toLowerCase().includes("us")
       })
     }
@@ -98,7 +118,13 @@ export function filterLaunches(state = baseQueryState) {
     //   }
     if (state.searchQuery) {
       displayedLaunches = displayedLaunches.filter(launch => {
-        return launch.Province_State.toLowerCase().includes(state.searchQuery.toLowerCase())
+        if (launch['County Name'] ) {
+
+        return launch['County Name'].toLowerCase().includes(state.searchQuery.toLowerCase())
+      } else {
+        return false
+
+      }
       })
     }
 

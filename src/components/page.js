@@ -5,6 +5,8 @@ import { Table, Col, Row, Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import refresh from '../assets/images/refresh.svg';
+import _ from 'lodash';
+import * as moment from 'moment';
 
 class Page extends Component {
   constructor(props) {
@@ -37,7 +39,8 @@ class Page extends Component {
 
 
     let { displayedLaunches, launches, isFetched, error } = this.props
-
+    let lastEntry = displayedLaunches[displayedLaunches.length-1]
+    let today = moment().format("MMM Do YYYY");
     let actualLaunches = displayedLaunches.map((launch, index) => {
 
       return (
@@ -59,7 +62,7 @@ class Page extends Component {
 
         {error && <div className="page__error">{error}</div>}
         <div className="white_text page_title">
-        a graphical approach of COVID-19
+        US County-level COVID-19 data
         </div>
 
         {isFetched ? (
@@ -85,24 +88,17 @@ class Page extends Component {
                          <Search onChange={this.handleSearch} />
                        </div>
                      </th>
-                     <th></th>
-                     <th>
-                       <input
-                          name="isUSOnly"
-                          type="checkbox"
-                          checked={this.state.isUSOnly}
-                          onChange={this.handleCheckBoxes} />
-                          <span className="white_text small_padding_left"> US Only </span>
+                     <th style={{color: "white"}}>
+                    Last updated { today }
+
+
                      </th>
                      <th>
-                       <input
-                          name="sortByPercentDiff"
-                          type="checkbox"
-                          checked={this.state.sortByPercentDiff}
-                          onChange={this.handleCheckBoxes} />
-                          <span className="white_text small_padding_left">Sort by biggest % diff </span>
+
+
                      </th>
-                     
+
+
                     </tr>
                 </tbody>
               </Table>

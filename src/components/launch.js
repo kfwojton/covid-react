@@ -32,14 +32,17 @@ class Launch extends PureComponent {
     var newCases = activeCases - yesterdaysCases
 
     var percentDiff = parseInt(newCases/yesterdaysCases * 100) + '%'
+    var countyName = launch['County Name']
+  
+
     // var test = _.find(launch,_.size(launch))
     // jsonData.seats[jsonData.seats.length-1].countryid
     const launchDate = moment(launch.launch_date_utc).format('MMMM Do YYYY, h:mm a');
     return (
 
       <tr className="table_row">
-        <th> {launch.Country_Region}</th>
-        <th> {launch.Province_State}</th>
+        <th> {launch.State}</th>
+        <th> {launch['County Name']}</th>
         <th> {activeCases}</th>
         <th> {newCases}</th>
         <th> {percentDiff}</th>
