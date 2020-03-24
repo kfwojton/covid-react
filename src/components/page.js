@@ -65,16 +65,22 @@ class Page extends Component {
         US County-level COVID-19 data
         </div>
 
+
+
         {isFetched ? (
           <p className="white_text">Loading...</p>
         ) : (
            <Container>
+
 
             <Row>
 
 
             <Col md="1"> < /Col>
               <Col md="10">
+              <div style={{color: "white", marginBottom:"20px", textAlign:"left"}}>
+              Why another COVID data table? We at Flux found that there wasn't a good way to quickly access what is happening in your county. Thus the Flux COVID reporting tools was created! This data may be a day or two delayed. What's Flux? Flux is a technology makerspace in Cleveland, Ohio. Find out more at www.fluxmakerspace.com
+              </div>
               <Table className="filter_bar">
                <tbody>
                  <tr>
@@ -89,6 +95,7 @@ class Page extends Component {
                        </div>
                      </th>
                      <th style={{color: "white"}}>
+
                     Last updated { today }
 
 
