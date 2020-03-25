@@ -5,6 +5,7 @@ import { Table, Col, Row, Container } from 'reactstrap';
 import linkImage from '../assets/images/link.svg';
 import moment from 'moment'
 import _ from 'lodash';
+import {Bar , Line} from 'react-chartjs-2';
 
 class ParentComponent extends PureComponent {
     constructor() {
@@ -55,11 +56,30 @@ class ParentComponent extends PureComponent {
         			</tr>
         ];
 
+        let keysFlat = _.keys(item ).slice(-15);
+
+        let itemsFlat = _.values(item).slice(-15)
+
+        let datab = {
+        labels: keysFlat,
+        datasets: [{
+        label: 'Cases in ' + item['County Name'] + '/' + item['State'],
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: itemsFlat,
+        fill: false
+        }]
+    }
+
         if(this.state.expandedRows.includes(index)) {
             itemRows.push(
                 <tr key={"row-expanded-" + index}>
 
-                   <td colspan="5">This text should be as long as the entire table's width...</td>
+
+                   <td colspan="5">
+
+                     < Line data={datab} />
+                   </td>
                 </tr>
             );
         }
