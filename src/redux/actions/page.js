@@ -44,18 +44,18 @@ function setLaunches(data) {
         var parsedJson = Papa.parse(datas , { header : true, transformHeader:true,
         });
 
-
-        let ip = fetch('https://api6.ipify.org?format=json')
-          .then(res => res.json())
-          .then(json => {
-
-
-            return ({text: json.ip});
-          });
-
-        console.log(ip);
-        console.log(ip);
-        parsedJson['ip'] = ip;
+        //
+        // let ip = fetch('https://api6.ipify.org?format=json')
+        //   .then(res => res.json())
+        //   .then(json => {
+        //
+        //
+        //     return ({text: json.ip});
+        //   });
+        //
+        // console.log(ip);
+        // console.log(ip);
+        // parsedJson['ip'] = ip;
         // parsedJson = _.filter(parsedJson, [launch => {
         //   if (launch.has('County Name')) {
         //     return true
