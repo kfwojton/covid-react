@@ -106,7 +106,8 @@ class Page extends Component {
                      </th>
                      <th style={{color: "white"}}>
 
-                    Last updated { today }
+                    Last updated { today } <br />
+                    Click a county below to see the graph over time.
 
 
                      </th>
