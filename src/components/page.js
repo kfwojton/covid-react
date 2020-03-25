@@ -8,6 +8,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import refresh from '../assets/images/refresh.svg';
 import _ from 'lodash';
 import * as moment from 'moment';
+import ReactGA from 'react-ga';
 
 class Page extends Component {
   constructor(props) {
@@ -24,6 +25,8 @@ class Page extends Component {
   }
 
   componentDidMount() {
+    ReactGA.initialize('UA-52755264-10');
+    ReactGA.pageview('/homepage');
     this.props.getLaunches()
   }
 
@@ -81,7 +84,7 @@ class Page extends Component {
             <Col md="1"> < /Col>
               <Col md="10">
               <div style={{color: "white", marginBottom:"20px", textAlign:"left"}}>
-              Why another COVID data table? We that found that there wasn't a good, easy to understand data source where you can quickly access what is happening in your county. Thus the Flux COVID reporting tools was created! This data may be a day or two delayed from local counties. What is Flux? Flux is a technology makerspace in Cleveland, Ohio. We build high-growth businesses and teach core development skills. Find out more at <a style={{color: "white" }} href="https://www.fluxmakerspace.com">  www.fluxmakerspace.com </a> or contact us at kevin@fluxmakerspace.com . 
+              Why another COVID data table? We that found that there wasn't a good, easy to understand data source where you can quickly access what is happening in your county. Thus the Flux COVID reporting tools was created! This data may be a day or two delayed from local counties. What is Flux? Flux is a technology makerspace in Cleveland, Ohio. We build high-growth businesses and teach core development skills. Find out more at <a style={{color: "white" }} href="https://www.fluxmakerspace.com">  www.fluxmakerspace.com </a> or contact us at kevin@fluxmakerspace.com .
                </div>
 
               <div style={{color: "white", marginBottom:"20px", textAlign:"left"}}>
