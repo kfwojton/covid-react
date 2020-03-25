@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Launch from '../components/launch'
+import ParentComponent from '../components/accordion'
 import Search from '../components/search'
 import { Table, Col, Row, Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -44,7 +45,8 @@ class Page extends Component {
     let actualLaunches = displayedLaunches.map((launch, index) => {
 
       return (
-          <Launch key={index} launch={launch}/>
+
+          <ParentComponent key={index} launch={launch}/>
       )
     })
 
@@ -110,23 +112,10 @@ class Page extends Component {
                 </tbody>
               </Table>
 
-                <Table className="main_table" hover>
-                   <thead>
-                     <tr>
-                           <th>State</th>
-                           <th>County</th>
-                           <th>Active Cases</th>
 
-                           <th>New Cases yesterday</th>
-                           <th>Day on Day Change</th>
-                     </tr>
-                     </thead>
-                     <tbody>
 
-                     {actualLaunches}
+                         <ParentComponent launches={displayedLaunches}/>
 
-                    </tbody>
-                </Table>
 
             </Col>
             <Col md="1"> < /Col>

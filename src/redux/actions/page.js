@@ -28,7 +28,7 @@ function setLaunches(data) {
     })
 
     // return fetch(`https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv`)
-    return fetch(`https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv?_ga=2.30767359.1530011231.1584999241-151559259.1584999241`)
+    return fetch(`https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv`)
       .then(response => {
 
         if (response.ok) {
@@ -38,10 +38,9 @@ function setLaunches(data) {
         throw new Error(`${response.status}: ${response.statusText}`)
       })
       .then(data => {
-        // var datas = data.replace('/'g, '');
+
         var datas = data.replace(new RegExp('/', 'g'), '_');
-        // var datas = data.replace(new RegExp('County Name', 'g'), 'County_Name');
-        // datas = datas.replace('/', '');
+
         var parsedJson = Papa.parse(datas , { header : true, transformHeader:true,
         });
 
@@ -50,7 +49,7 @@ function setLaunches(data) {
           .then(res => res.json())
           .then(json => {
 
-             // = json.ap
+
             return ({text: json.ip});
           });
 
@@ -96,9 +95,8 @@ export function filterLaunches(state = baseQueryState) {
     let displayedLaunches = getState().page.launches;
 
     displayedLaunches = displayedLaunches.filter(launch =>_.has(launch,'County Name') );
-    console.log("Walter");
+
     var lastEntry = displayedLaunches[displayedLaunches.length-1]
-    // var lastValue = lastEntry[lastEntry.length-1]
     var lastKey = _.findLastKey(lastEntry)
 
     displayedLaunches = _.reverse(_.sortBy( displayedLaunches, [object => parseInt(object[lastKey])]));
