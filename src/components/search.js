@@ -4,7 +4,7 @@ const Search = ({ onChange }) => (
   <input
     type="text"
     onChange={onChange}
-    placeholder="Enter Location (State/Country)..."
+    placeholder="Enter County..."
     autoFocus
     name="search"
   />
