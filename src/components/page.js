@@ -91,10 +91,7 @@ class Page extends Component {
               This data was pulled from US Data sources as a primary source - https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv
               </div>
 
-              // <div style={{color: "white", marginBottom:"20px", textAlign:"left"}}>
-              // *3/26/2020 update: The data source added some new rows of data, causing our data to be off. Please sit tight this will be fixed asap. Stay Vigilant.
-              // </div>
-
+            
               <Table className="filter_bar">
                <tbody>
                  <tr>
