@@ -37,11 +37,11 @@ class ParentComponent extends PureComponent {
     renderItem(item,index) {
 
         var arrayCases = _.flatMap(item)
-      
 
-        var activeCases = arrayCases[arrayCases.length-2]
 
-        var yesterdaysCases = arrayCases[arrayCases.length-3]
+        var activeCases = arrayCases[arrayCases.length-1]
+
+        var yesterdaysCases = arrayCases[arrayCases.length-2]
         var newCases = activeCases - yesterdaysCases
 
         var percentDiff = parseInt(newCases/yesterdaysCases * 100) + '%'
@@ -94,10 +94,13 @@ class ParentComponent extends PureComponent {
         const { launches } = this.props
         let allItemRows = [];
         // let allItemRows = this.renderItem(launch)
-        console.log("kevin");
-        console.log(launches)
-        launches.map((item, index) => {
 
+
+        launches.map((item, index) => {
+          console.log("kevin");
+          if (_.has(item,"")) {
+            delete item[""]
+          }
           const perItemRows = this.renderItem(item,index);
           allItemRows = allItemRows.concat(perItemRows);
         });
