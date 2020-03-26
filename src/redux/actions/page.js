@@ -44,27 +44,6 @@ function setLaunches(data) {
         var parsedJson = Papa.parse(datas , { header : true, transformHeader:true,
         });
 
-        //
-        // let ip = fetch('https://api6.ipify.org?format=json')
-        //   .then(res => res.json())
-        //   .then(json => {
-        //
-        //
-        //     return ({text: json.ip});
-        //   });
-        //
-        // console.log(ip);
-        // console.log(ip);
-        // parsedJson['ip'] = ip;
-        // parsedJson = _.filter(parsedJson, [launch => {
-        //   if (launch.has('County Name')) {
-        //     return true
-        //   } else {
-        //     return false
-        //   }} ]
-        //   );
-        // parsedJson = _.sortBy(parsedJson, [item => item[item.length-1]])
-        // parsedJson = _.sortBy(parsedJson, 'County Name')
 
         dispatch({
           type: GET_LAUNCHES_SUCCESS
@@ -98,6 +77,8 @@ export function filterLaunches(state = baseQueryState) {
 
     var lastEntry = displayedLaunches[displayedLaunches.length-1]
     var lastKey = _.findLastKey(lastEntry)
+    console.log("lastKey")
+    
 
     displayedLaunches = _.reverse(_.sortBy( displayedLaunches, [object => parseInt(object[lastKey])]));
     // displayedLaunches = _.sortBy(displayedLaunchs, [function(o) { return o.user; }]
