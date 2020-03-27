@@ -28,7 +28,10 @@ function setLaunches(data) {
     })
 
     // return fetch(`https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv`)
-    return fetch(`https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv`)
+    // return fetch(`https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv`)
+    return fetch(`https://usafactsstatic.blob.core.windows.net/public/data/covid-19/covid_confirmed_usafacts.csv`)
+
+
       .then(response => {
 
         if (response.ok) {
@@ -78,7 +81,7 @@ export function filterLaunches(state = baseQueryState) {
     var lastEntry = displayedLaunches[displayedLaunches.length-1]
     var lastKey = _.findLastKey(lastEntry)
     console.log("lastKey")
-    
+
 
     displayedLaunches = _.reverse(_.sortBy( displayedLaunches, [object => parseInt(object[lastKey])]));
     // displayedLaunches = _.sortBy(displayedLaunchs, [function(o) { return o.user; }]
