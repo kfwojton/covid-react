@@ -15,6 +15,8 @@ function setLaunches(data) {
     return launches
   })
 
+
+
   return {
     type: SET_LAUNCHES,
     payload: launches
@@ -27,8 +29,7 @@ function setLaunches(data) {
       type: GET_LAUNCHES_REQUEST
     })
 
-    // return fetch(`https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_19-covid-Confirmed.csv`)
-    // return fetch(`https://static.usafacts.org/public/data/covid-19/covid_confirmed_usafacts.csv`)
+
     return fetch(`https://usafactsstatic.blob.core.windows.net/public/data/covid-19/covid_confirmed_usafacts.csv`)
 
 
@@ -46,6 +47,26 @@ function setLaunches(data) {
 
         var parsedJson = Papa.parse(datas , { header : true, transformHeader:true,
         });
+
+
+        var allUSA = {
+            'County Name': 'USA',
+            'State': 'All'
+          }
+        var dates = _.flatMap(_.keys(parsedJson.data[0])).slice(-15)
+
+         _.forEach(dates, date => {
+           allUSA[date] = _.sum(parsedJson.data.map((item) => {
+                                 return parseInt(item[date])
+                         }));
+          }
+        )
+
+
+
+
+
+        parsedJson.data.push(allUSA);
 
 
         dispatch({
@@ -80,7 +101,6 @@ export function filterLaunches(state = baseQueryState) {
 
     var lastEntry = displayedLaunches[displayedLaunches.length-1]
     var lastKey = _.findLastKey(lastEntry)
-    console.log("lastKey")
 
 
     displayedLaunches = _.reverse(_.sortBy( displayedLaunches, [object => parseInt(object[lastKey])]));
