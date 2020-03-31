@@ -1,24 +1,14 @@
 import React, { PureComponent } from 'react';
-import { useState } from 'react';
-import { Collapse, Button, CardBody, Card } from 'reactstrap';
-import { Table, Col, Row, Container } from 'reactstrap';
-import linkImage from '../assets/images/link.svg';
-import moment from 'moment'
+import { Table } from 'reactstrap';
 import _ from 'lodash';
-import {Bar , Line} from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
+
 
 class ParentComponent extends PureComponent {
     constructor() {
         super();
 
         this.state = {
-            data : [
-                {id : 1, date : "2014-04-18", total : 121.0, status : "Shipped", name : "A", points: 5, percent : 50},
-                {id : 2, date : "2014-04-21", total : 121.0, status : "Not Shipped", name : "B", points: 10, percent: 60},
-                {id : 3, date : "2014-08-09", total : 121.0, status : "Not Shipped", name : "C", points: 15, percent: 70},
-                {id : 4, date : "2014-04-24", total : 121.0, status : "Shipped", name : "D", points: 20, percent : 80},
-                {id : 5, date : "2014-04-26", total : 121.0, status : "Shipped", name : "E", points: 25, percent : 90},
-            ],
             expandedRows : []
         };
     }
@@ -38,14 +28,13 @@ class ParentComponent extends PureComponent {
 
         var arrayCases = _.flatMap(item)
 
-
-        var activeCases = arrayCases[arrayCases.length-1]
+        var activeCases = parseInt(arrayCases[arrayCases.length-1])
 
         var yesterdaysCases = arrayCases[arrayCases.length-2]
         var newCases = activeCases - yesterdaysCases
 
         var percentDiff = parseInt(newCases/yesterdaysCases * 100) + '%'
-        var countyName = item['County Name']
+
 
 
         const clickCallback = () => this.handleRowClick(index);
@@ -53,8 +42,8 @@ class ParentComponent extends PureComponent {
         			<tr onClick={clickCallback} key={"row-data-" + index}>
         			    <td>{item.State}</td>
                   <th> {item['County Name']}</th>
-                  <th> {activeCases}</th>
-                  <th> {newCases}</th>
+                  <th> {activeCases.toLocaleString()}</th>
+                  <th> {newCases.toLocaleString()}</th>
                   <th> {percentDiff}</th>
         			</tr>
         ];
@@ -62,24 +51,42 @@ class ParentComponent extends PureComponent {
         let keysFlat = _.keys(item ).slice(-15);
 
         let itemsFlat = _.values(item).slice(-15)
+        var dailyDiff = itemsFlat.map((rank, i, arr) => {
+                              return (arr[i] - arr[i-1])
+                      });
 
         let datab = {
-        labels: keysFlat,
-        datasets: [{
-        label: 'Cases in ' + item['County Name'] + '/' + item['State'],
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-        data: itemsFlat,
-        fill: false
-        }]
+          labels: keysFlat,
+          datasets: [{
+            label: 'Total Cases in ' + item['County Name'] + '/' + item['State'],
+            backgroundColor: 'rgb(255, 99, 132)',
+            borderColor: 'rgb(255, 99, 132)',
+            data: itemsFlat,
+            fill: false,
+            type: 'line'
+          },
+          {
+            label: 'New Cases in ' + item['County Name'] + '/' + item['State'],
+            backgroundColor: 'rgb(2, 99, 132)',
+            borderColor: 'rgb(2, 99, 132)',
+            data: dailyDiff,
+            fill: true,
+            borderDash: [],
+            type: 'line'
+          },
+
+
+        ]
     }
+
+
 
         if(this.state.expandedRows.includes(index)) {
             itemRows.push(
                 <tr key={"row-expanded-" + index}>
 
 
-                   <td colspan="5">
+                   <td colSpan="5">
 
                      < Line data={datab} />
                    </td>
@@ -93,26 +100,16 @@ class ParentComponent extends PureComponent {
     render() {
         const { launches } = this.props
         let allItemRows = [];
-        // let allItemRows = this.renderItem(launch)
 
 
         launches.map((item, index) => {
-          console.log("kevin");
+
           if (_.has(item,"")) {
             delete item[""]
           }
           const perItemRows = this.renderItem(item,index);
           allItemRows = allItemRows.concat(perItemRows);
         });
-
-        // launches.forEach(item => {
-        //     const perItemRows = this.renderItem(item);
-        //     allItemRows = allItemRows.concat(perItemRows);
-        // });
-
-
-
-        // const launchDate = moment(launch.launch_date_utc).format('MMMM Do YYYY, h:mm a');
 
         return (
           <Table className="main_table" hover>
