@@ -87,7 +87,7 @@ class Page extends Component {
 
               <div style={{color: "white", marginBottom:"20px", textAlign:"left"}}>
               <span > <b style={{fontSize:"20px",textDecorationLine: "underline"}}> Qualitative Update: </b>  </span>
-              The US is just starting testing, we expect see numbers to rise drastically as testing is scaled up. The curve everyone is talking about is blue line in the chart. We won't see this decline until mass testing and social distancing adoption take root. 
+              The US is just starting testing, we expect see numbers to rise drastically as testing is scaled up. The curve everyone is talking about is blue line in the chart. We won't see this decline until mass testing and social distancing adoption take root.
               </div>
 
 

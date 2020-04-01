@@ -118,7 +118,6 @@ class ParentComponent extends PureComponent {
                   <th>State</th>
                   <th>County</th>
                   <th>Active Cases</th>
-
                   <th>New Cases yesterday</th>
                   <th>Day on Day Change</th>
             </tr>

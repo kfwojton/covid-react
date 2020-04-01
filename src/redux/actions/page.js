@@ -54,16 +54,19 @@ function setLaunches(data) {
             'State': 'All'
           }
         var dates = _.flatMap(_.keys(parsedJson.data[0])).slice(-15)
-
+        console.log(dates)
          _.forEach(dates, date => {
            allUSA[date] = _.sum(parsedJson.data.map((item) => {
+                                if (_.isNaN(parseInt(item[date]))) {
+                                  return 0
+                                } else {
                                  return parseInt(item[date])
+                               }
                          }));
           }
-        )
 
 
-
+          )
 
 
         parsedJson.data.push(allUSA);
@@ -112,12 +115,7 @@ export function filterLaunches(state = baseQueryState) {
       })
     }
 
-    // if (state.isLaunchSuccess) {
-    //   displayedLaunches = displayedLaunches.filter(launch => launch.launch_success === true);
-    // }
-    // if (state.isWithReddit) {
-    //   displayedLaunches = displayedLaunches.filter(launch => launch.links.reddit_campaign || launch.links.reddit_launch || launch.links.reddit_media || launch.links.reddit_recovery);
-    //   }
+  
     if (state.searchQuery) {
       displayedLaunches = displayedLaunches.filter(launch => {
         if (launch['County Name'] ) {
