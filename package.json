@@ -16,6 +16,7 @@
     "react-chartjs-2": "^2.9.0",
     "react-dom": "^16.7.0",
     "react-ga": "^2.7.0",
+    "react-hotjar": "^2.2.0",
     "react-redux": "^6.0.0",
     "react-scripts": "2.1.1",
     "reactstrap": "^7.0.2",

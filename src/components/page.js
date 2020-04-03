@@ -6,6 +6,8 @@ import { Table, Col, Row, Container } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import refresh from '../assets/images/refresh.svg';
+import { hotjar } from 'react-hotjar';
+import _ from 'lodash';
 
 import * as moment from 'moment';
 import ReactGA from 'react-ga';
@@ -27,7 +29,8 @@ class Page extends Component {
   componentDidMount() {
     ReactGA.initialize('UA-52755264-10');
     ReactGA.pageview('/homepage');
-    this.props.getLaunches()
+    this.props.getLaunches();
+    hotjar.initialize(1754738, 6);
   }
 
   handleCheckBoxes(event) {
@@ -45,6 +48,17 @@ class Page extends Component {
     let { displayedLaunches, isFetched, error } = this.props
     let lastEntry = displayedLaunches[displayedLaunches.length-1]
     let today = moment().format("MMM Do YYYY");
+    displayedLaunches = _.filter(displayedLaunches, launch => {
+      if (launch['County Name'] === 'Weston County') {
+
+        return false
+      } else {
+
+        return true
+
+      }
+
+    } )
     let actualLaunches = displayedLaunches.map((launch, index) => {
 
       return (

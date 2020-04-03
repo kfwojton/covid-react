@@ -53,7 +53,7 @@ function setLaunches(data) {
             'County Name': 'USA',
             'State': 'All'
           }
-        var dates = _.flatMap(_.keys(parsedJson.data[0])).slice(-15)
+        var dates = _.flatMap(_.keys(parsedJson.data[0])).slice(-18)
         console.log(dates)
          _.forEach(dates, date => {
            allUSA[date] = _.sum(parsedJson.data.map((item) => {
@@ -115,7 +115,7 @@ export function filterLaunches(state = baseQueryState) {
       })
     }
 
-  
+
     if (state.searchQuery) {
       displayedLaunches = displayedLaunches.filter(launch => {
         if (launch['County Name'] ) {

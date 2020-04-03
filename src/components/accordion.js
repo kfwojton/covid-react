@@ -48,9 +48,9 @@ class ParentComponent extends PureComponent {
         			</tr>
         ];
 
-        let keysFlat = _.keys(item ).slice(-15);
+        let keysFlat = _.keys(item ).slice(-18);
 
-        let itemsFlat = _.values(item).slice(-15)
+        let itemsFlat = _.values(item).slice(-18)
         var dailyDiff = itemsFlat.map((rank, i, arr) => {
                               return (arr[i] - arr[i-1])
                       });
