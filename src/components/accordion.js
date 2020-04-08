@@ -112,7 +112,7 @@ class ParentComponent extends PureComponent {
         });
 
         return (
-          <Table className="main_table" hover>
+          <Table className="main_table" hover responsive={true} >
           <thead>
             <tr>
                   <th>State</th>

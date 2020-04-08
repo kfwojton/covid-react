@@ -104,37 +104,33 @@ class Page extends Component {
               The US is just starting testing, we expect see numbers to rise drastically as testing is scaled up. The curve everyone is talking about is blue line in the chart. We won't see this decline until mass testing and social distancing adoption take root.
               </div>
 
+              <Container className="filter_bar">
+              <div >
+                <Row style={{paddingTop:"30px", paddingBottom:"30px"}}>
+                  <Col>
+                     <button className="button_hide" onClick={this.props.getLaunches}>
+                      <img className="refresh_icon" src={refresh} alt="refresh"/>
+                     </button>
+                  </Col>
+                  <Col>
+                         <div className="page__search">
+                           <Search onChange={this.handleSearch} />
+                         </div>
+                  </Col>
 
-              <Table className="filter_bar">
-               <tbody>
-                 <tr>
-                   <th>
-                   <button className="button_hide" onClick={this.props.getLaunches}>
-                    <img className="refresh_icon" src={refresh} alt="refresh"/>
-                   </button>
-                   </th>
-                     <th>
-                       <div className="page__search">
-                         <Search onChange={this.handleSearch} />
-                       </div>
-                     </th>
-                     <th style={{color: "white"}}>
+                  <Col style={{color: "white"}}>
+                      Last updated { today } <br />
 
-                    Last updated { today } <br />
+                  </Col>
+
+                  <Col xs="12" sm="12" style={{color: "white"}}>
                     Click a county below to see the graph over time.
+                  </Col>
+                </Row>
 
 
-                     </th>
-                     <th>
-
-
-                     </th>
-
-
-                    </tr>
-                </tbody>
-              </Table>
-
+              </div>
+              </Container>
 
 
                          <ParentComponent launches={displayedLaunches}/>
