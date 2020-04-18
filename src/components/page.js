@@ -202,17 +202,6 @@ class Page extends Component {
                       <Col xs="12" sm="12" style={{ color: 'white' }}>
                         Click a county below to see the graph over time.
                       </Col>
-                      <Col
-                        xs="12"
-                        sm="12"
-                        style={{ color: 'white', marginTop: '20px' }}
-                      >
-                        <button onClick={this.getLocation}>
-                          Get my location
-                        </button>
-                        <p>Latitude: {this.state.latitude}</p>
-                        <p>Longitude: {this.state.longitude}</p>
-                      </Col>
                     </Row>
                   </div>
                 </Container>
