@@ -21,7 +21,7 @@ class Page extends Component {
       isWithReddit: false,
       searchQuery: ''
     }
-
+    // all custom functions need to be binded to the component it self to allow two-way bindings. As you may know javascript/ react doesn't allow information to flow upwards unless you bind functions to the parent component like htis.
     this.handleSearch = this.handleSearch.bind(this)
     this.handleCheckBoxes = this.handleCheckBoxes.bind(this)
     this.getLocation = this.getLocation.bind(this)
@@ -43,6 +43,7 @@ class Page extends Component {
       longitude: position.coords.longitude
     })
   }
+  // overwriting the intial component life cycle
 
   componentDidMount() {
     ReactGA.initialize('UA-52755264-10')
@@ -51,6 +52,7 @@ class Page extends Component {
     hotjar.initialize(1754738, 6)
   }
 
+  // setting custom component functions
   handleCheckBoxes(event) {
     const value = event.target.checked
     this.setState({ [event.target.name]: value }, () =>
@@ -75,8 +77,10 @@ class Page extends Component {
         return true
       }
     })
+    // This is a great example of the equivelent statement in django of Item.objects.all().exclude(county_name  "Weston County"). Don't you love how verbose js is when compared to python.
     let actualLaunches = displayedLaunches.map((launch, index) => {
       return <ParentComponent key={index} launch={launch} />
+      // These variables are called props, or properties, which means passing specific information to a component to manage from a parent component. Props are different than a redux state
     })
 
     return (
@@ -85,7 +89,7 @@ class Page extends Component {
         <div className="white_text page_title">
           US County Level COVID-19 data
         </div>
-
+        // This is all jsx, aka reacts version of html. The syntax is close but different than standard html, but compiles to standard html. The difference is that you can handle multiple components in real time.
         {isFetched ? (
           <p className="white_text">Loading...</p>
         ) : (
@@ -207,6 +211,7 @@ class Page extends Component {
                 </Container>
 
                 <ParentComponent launches={displayedLaunches} />
+                // More props, you can see that {} plays the same role as {{ }} in django.
               </Col>
               <Col md="1"> </Col>
             </Row>
