@@ -6,7 +6,6 @@ import { Line } from 'react-chartjs-2'
 class ParentComponent extends PureComponent {
   constructor() {
     super()
-
     this.state = {
       expandedRows: []
     }
@@ -101,6 +100,7 @@ class ParentComponent extends PureComponent {
 
     launches.map((item, index) => {
       if (_.has(item, '')) {
+        // This is all called lodash --> https://lodash.com/ , which has been largely replaced with es6's new array mapping functions. Thus I wouldn't say lodash is best practices anymore. 
         delete item['']
       }
       const perItemRows = this.renderItem(item, index)
